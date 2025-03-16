@@ -1,26 +1,20 @@
 const btn = document.querySelector("#butto");
-const box = document.querySelector("#card")
+const box = document.querySelector("#card .card__content");
 
 async function renderMap(){
     try{
-        const res = await fetch("https://ipinfo.io/json")
+        const res = await fetch("https://ipinfo.io/json");
         const data = await res.json();
-        box.innerHTML = 
-        `
-        <strong>Ip : ${data.ip} /strong>
-        <strong>City : ${data.city} /strong>
-        <strong>Region : ${data.region} /strong>
-        <strong>Country : ${data.country} /strong>
-        <strong>timezone : ${data.timezone} /strong>
-        `
-    }
-
-    catch(error){
-        console.error("Error fetching data:", error)
-        return;
+        box.innerHTML = `
+            <p><strong>Ip:</strong> ${data.ip}</p>
+            <p><strong>City:</strong> ${data.city}</p>
+            <p><strong>Region:</strong> ${data.region}</p>
+            <p><strong>Country:</strong> ${data.country}</p>
+            <p><strong>Timezone:</strong> ${data.timezone}</p>
+        `;
+    } catch(error) {
+        console.error("Error fetching data:", error);
     }
 }
 
-btn.addEventListener("click", ()=> {
-    renderMap();
-})
+btn.addEventListener("click", renderMap);
